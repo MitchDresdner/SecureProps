@@ -5,3 +5,6 @@
 ![alt text][snap]
 
 [snap]: https://user-images.githubusercontent.com/4605105/76032967-0adfb980-5f09-11ea-86b8-d5f79a82f3c3.PNG "Secure Porps screen shot"
+
+**Gist for image uploads**
+[here](https://gist.github.com/vinkla/dca76249ba6b73c5dd66a4e986df4c8d)
