@@ -14,7 +14,7 @@ class MyApp: App(MainView::class, Styles::class) {
         }
 
         var myPath = Paths.get("").toAbsolutePath().toString()
-        setStageIcon(Image("file:///${myPath}/images/Mulesoft.png"))
+        setStageIcon(Image("file:///${myPath}/images/Favico.png"))
 
         super.start(stage)
     }
