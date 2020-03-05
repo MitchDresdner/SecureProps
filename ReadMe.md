@@ -4,4 +4,4 @@
 
 ![alt text][snap]
 
-[snap]: https://github.com/MitchDresdner/SecureProps/tree/master/images/ScreenShot.png "Secure Porps screen shot"
+[snap]: https://user-images.githubusercontent.com/4605105/76032967-0adfb980-5f09-11ea-86b8-d5f79a82f3c3.PNG "Secure Porps screen shot"
