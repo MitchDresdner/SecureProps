@@ -9,6 +9,7 @@ import javafx.scene.control.Toggle
 import javafx.scene.control.ToggleGroup
 import javafx.scene.layout.Priority
 import javafx.scene.text.Font
+import javafx.scene.text.FontWeight
 import org.omg.SendingContext.RunTime
 import tornadofx.*
 import java.io.File
@@ -50,6 +51,9 @@ class MainView : View("SecureProps EncDec") {
             vboxConstraints {
                 margin = Insets(20.0,20.0,20.0,20.0)
                 vGrow = Priority.ALWAYS
+            }
+            style {
+                fontWeight = FontWeight.BOLD
             }
             alignment = Pos.CENTER
             text = "Secure Property Encode/Decode"
@@ -136,9 +140,19 @@ class MainView : View("SecureProps EncDec") {
         }
 
 
+        label {
+            vboxConstraints {
+                margin = Insets(10.0,20.0,2.0,20.0)
+                vGrow = Priority.ALWAYS
+            }
+            style {
+                fontWeight = FontWeight.BOLD
+            }
+            text = "Password"
+        }
         passwordfield {
             vboxConstraints {
-                margin = Insets(20.0,20.0,20.0,20.0)
+                margin = Insets(2.0,20.0,20.0,20.0)
                 vGrow = Priority.ALWAYS
             }
             prefHeight = 25.0
@@ -147,19 +161,38 @@ class MainView : View("SecureProps EncDec") {
             this.textProperty().bindBidirectional(secretField)
         }
 
-        //textarea(textAreaRes)
+        label {
+            vboxConstraints {
+                margin = Insets(2.0,20.0,2.0,20.0)
+                vGrow = Priority.ALWAYS
+            }
+            style {
+                fontWeight = FontWeight.BOLD
+            }
+            text = "Secret (encrypted secret when decoding)"
+        }
         textarea {
             vboxConstraints {
-                margin = Insets(20.0,20.0,20.0,20.0)
+                margin = Insets(2.0,20.0,20.0,20.0)
                 vGrow = Priority.ALWAYS
             }
             promptText="Enter secret to encode, or result"
             this.textProperty().bindBidirectional(textField)
         }
 
+        label {
+            vboxConstraints {
+                margin = Insets(2.0,20.0,2.0,20.0)
+                vGrow = Priority.ALWAYS
+            }
+            style {
+                fontWeight = FontWeight.BOLD
+            }
+            text = "Encoded secret (decrypted secret when decoding)"
+        }
         textarea {
             vboxConstraints {
-                margin = Insets(20.0,20.0,20.0,20.0)
+                margin = Insets(2.0,20.0,20.0,20.0)
                 vGrow = Priority.ALWAYS
             }
             promptText="Result"

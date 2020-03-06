@@ -9,12 +9,12 @@ import java.nio.file.Paths
 class MyApp: App(MainView::class, Styles::class) {
     override fun start(stage: Stage) {
         with (stage) {
-            width = 640.0
+            width = 500.0
             height = 480.0
         }
 
         var myPath = Paths.get("").toAbsolutePath().toString()
-        setStageIcon(Image("file:///${myPath}/images/Favico.png"))
+        setStageIcon(Image("file:///${myPath}/images/Tardis-133x200.jpg"))      // Favico.png
 
         super.start(stage)
     }
