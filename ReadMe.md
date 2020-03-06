@@ -7,6 +7,8 @@ In my blog post [Securing Mule 4 config properties](https://bestow.info/securing
 I'm still considering an appropriate layout for runtime Jar files and will update this section to describe how you might add external Jar files such as JCE to enhance the cryptographic algorithms and ciphers which can be used.
 
 **TornadoFx GUI application**
+
+
 ![alt text][snap]
 
 [snap]: https://user-images.githubusercontent.com/4605105/76085321-ce9b7000-5f7f-11ea-84eb-44c5e603d176.PNG "Secure Props screen shot"
