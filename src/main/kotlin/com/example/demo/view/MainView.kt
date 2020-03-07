@@ -1,25 +1,22 @@
 package com.example.demo.view
 
-import javafx.beans.property.ReadOnlyObjectProperty
+import com.example.demo.controller.EncDecController
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
+import javafx.collections.ObservableList
 import javafx.geometry.Insets
 import javafx.geometry.Pos
-import javafx.scene.control.Toggle
 import javafx.scene.control.ToggleGroup
 import javafx.scene.layout.Priority
 import javafx.scene.text.Font
 import javafx.scene.text.FontWeight
-import org.omg.SendingContext.RunTime
 import tornadofx.*
-import java.io.File
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 class MainView : View("SecureProps EncDec") {
+    private val controller: EncDecController by inject()
 
-    val cryptoAlg = FXCollections.observableArrayList(
+
+    private val cryptoAlg: ObservableList<String> = FXCollections.observableArrayList(
             "AES",
             "Blowfish",
             "DES",
@@ -28,7 +25,7 @@ class MainView : View("SecureProps EncDec") {
             "RCA"
     )
 
-    val cryptoCipher = FXCollections.observableArrayList(
+    private val cryptoCipher: ObservableList<String> = FXCollections.observableArrayList(
             "CBC",
             "CFB",
             "ECB",
@@ -116,29 +113,27 @@ class MainView : View("SecureProps EncDec") {
                             }
                             text = "Run"
                             action {
-//                                var t: Toggle = encdecGrp.selectedToggle
-//                                val t1 : ReadOnlyObjectProperty<Toggle>? = encdecGrp.selectedToggleProperty()
-                                val res = runExec(
-                                        String.format(
-                                                "java -jar /tools/lib/secure-properties-tool.jar string %s %s %s %s \"%s\"",
+                                runAsync {
+                                    controller.runExec(
+                                            String.format(
+                                                    "java -jar /tools/lib/secure-properties-tool.jar string %s %s %s %s \"%s\"",
                                                     encDec,
                                                     selectedAlg.value,
                                                     selectedCipher.value,
                                                     secretField.value,
                                                     textField.value
-
-                                        ))
-                                textFieldRes.set(res)
-                                println("Clicked ${selectedAlg.value} |  ${selectedCipher.value} | ${encdecGrp.selectedToggle.userData}")
-//                                print(t)
-//                                print("Got $foo")
+                                            ))
+                                } ui {
+                                    val res = controller.conversionRes.value
+                                    textFieldRes.set(res)
+                                    println("Clicked ${selectedAlg.value} |  ${selectedCipher.value} | ${encdecGrp.selectedToggle.userData}")
+                                }
                             }
                         }
                     }
                 }
             }
         }
-
 
         label {
             vboxConstraints {
@@ -199,33 +194,5 @@ class MainView : View("SecureProps EncDec") {
             this.textProperty().bindBidirectional(textFieldRes)
         }
 
-    }
-
-    fun runExec(cmd: String): String? {
-        val process: Process = Runtime.getRuntime().exec(cmd)
-
-        val sc = Scanner(process.inputStream)
-        val res = sc.nextLine()
-        println(res)
-        sc.close()
-
-        return res
-    }
-
-    fun String.runCommand(workingDir: File): String? {
-        try {
-            val parts = this.split("\\s".toRegex())
-            val proc = ProcessBuilder(*parts.toTypedArray())
-                    .directory(workingDir)
-                    .redirectOutput(ProcessBuilder.Redirect.PIPE)
-                    .redirectError(ProcessBuilder.Redirect.PIPE)
-                    .start()
-
-            proc.waitFor(60, TimeUnit.MINUTES)
-            return proc.inputStream.bufferedReader().readText()
-        } catch(e: IOException) {
-            e.printStackTrace()
-            return null
-        }
     }
 }
