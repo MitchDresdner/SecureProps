@@ -7,6 +7,7 @@ import javafx.collections.ObservableList
 import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.ToggleGroup
+import javafx.scene.image.Image
 import javafx.scene.layout.Priority
 import javafx.scene.text.Font
 import javafx.scene.text.FontWeight
@@ -48,7 +49,7 @@ class MainView : View("SecureProps EncDec") {
 
         label {
             vboxConstraints {
-                margin = Insets(20.0,20.0,20.0,20.0)
+                margin = Insets(20.0,20.0,20.0,200.0)
                 vGrow = Priority.ALWAYS
             }
             style {
@@ -62,7 +63,7 @@ class MainView : View("SecureProps EncDec") {
 
             hboxConstraints {
                 //marginLeft = 20.0
-                padding = Insets(0.0,0.0,0.0,20.0)
+                padding = Insets(0.0,0.0,10.0,200.0)
                 alignment = Pos.BASELINE_LEFT
                 spacing = 20.0
                 hGrow = Priority.ALWAYS
@@ -75,6 +76,7 @@ class MainView : View("SecureProps EncDec") {
             combobox(selectedCipher, cryptoCipher) {
                 selectionModel.selectFirst()
             }
+
         }
 
         hbox {
@@ -93,6 +95,9 @@ class MainView : View("SecureProps EncDec") {
                 }
 
                 vbox {
+                    vboxConstraints {
+                        spacing = 3.0
+                    }
                     radiobutton("Encode", encdecGrp, "ENC" ) {
                         isSelected = true
                         setOnAction {
@@ -113,7 +118,7 @@ class MainView : View("SecureProps EncDec") {
                         }
                         button {
                             vboxConstraints {
-                                margin = Insets(20.0,20.0,20.0,20.0)
+                                margin = Insets(10.0,20.0,20.0,20.0)
                                 vGrow = Priority.ALWAYS
                             }
                             tooltip("Encode or Decode secrets") {
@@ -124,7 +129,7 @@ class MainView : View("SecureProps EncDec") {
                                 runAsync {
                                     controller.runExec(
                                             String.format(
-                                                    "java -jar /tools/lib/secure-properties-tool.jar string %s %s %s %s \"%s\"",
+                                                    "java -jar ./secure-properties-tool.jar string %s %s %s %s \"%s\"",
                                                     encDec,
                                                     selectedAlg.value,
                                                     selectedCipher.value,
