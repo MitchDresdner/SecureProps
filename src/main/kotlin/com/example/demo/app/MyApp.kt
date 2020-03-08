@@ -10,11 +10,10 @@ class MyApp: App(MainView::class, Styles::class) {
     override fun start(stage: Stage) {
         with (stage) {
             width = 500.0
-            height = 480.0
+            height = 490.0
         }
 
-        var myPath = Paths.get("").toAbsolutePath().toString()
-        setStageIcon(Image("file:///${myPath}/images/Tardis-133x200.jpg"))      // Favico.png
+        setStageIcon(Image("images/Tardis-133x200.jpg"))
 
         super.start(stage)
     }
