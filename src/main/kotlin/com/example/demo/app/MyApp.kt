@@ -6,6 +6,7 @@ import javafx.stage.Stage
 import tornadofx.*
 import java.nio.file.Paths
 
+
 class MyApp: App(MainView::class, Styles::class) {
     override fun start(stage: Stage) {
         with (stage) {
