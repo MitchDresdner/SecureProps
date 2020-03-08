@@ -39,11 +39,6 @@ dependencies {
     testRuntime "org.junit.jupiter:junit-jupiter-engine:$junit_version"
 }
 
-task imgCopy(type: Copy) {
-    from "$projectDir/images"
-    into "$buildDir/images"
-}
-
 
 mainClassName = "com.example.demo.app.MyApp"
 
@@ -53,9 +48,6 @@ jar {
                 "Class-Path": configurations.compile.collect { it.getName() }.join(" "),
                 "Main-Class": mainClassName
         )
-    }
-    from(imgCopy) {
-        into 'images'
     }
     from(configurations.compile.collect { entry -> zipTree(entry) }) {
         exclude "META-INF/MANIFEST.MF"
