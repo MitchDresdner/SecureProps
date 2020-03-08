@@ -54,9 +54,9 @@ jar {
                 "Main-Class": mainClassName
         )
     }
-    from(imgCopy) {
-        into 'images'
-    }
+//    from(imgCopy) {
+//        into 'images'
+//    }
     from(configurations.compile.collect { entry -> zipTree(entry) }) {
         exclude "META-INF/MANIFEST.MF"
         exclude "META-INF/*.SF"
