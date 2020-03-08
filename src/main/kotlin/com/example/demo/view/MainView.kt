@@ -33,6 +33,8 @@ class MainView : View("SecureProps EncDec") {
     )
 
     private var encDec = "encrypt"
+    private var isEncrypted : Boolean = (encDec == "encrypt")
+    private var isYAML = false
     private var secretField = SimpleStringProperty("mulesofttfoselum")
     private var textField = SimpleStringProperty("")
     private var textFieldRes = SimpleStringProperty("")
@@ -93,10 +95,16 @@ class MainView : View("SecureProps EncDec") {
                 vbox {
                     radiobutton("Encode", encdecGrp, "ENC" ) {
                         isSelected = true
-                        setOnAction { encDec = "encrypt" }
+                        setOnAction {
+                            encDec = "encrypt"
+                            isEncrypted = true
+                        }
                     }
                     radiobutton("Decode", encdecGrp, "DEC") {
-                        setOnAction {  encDec ="decrypt" }
+                        setOnAction {
+                            encDec ="decrypt"
+                            isEncrypted = false
+                        }
                     }
                     vbox {
                         vboxConstraints {
@@ -125,8 +133,16 @@ class MainView : View("SecureProps EncDec") {
                                             ))
                                 } ui {
                                     val res = controller.conversionRes.value
-                                    textFieldRes.set(res)
-                                    println("Clicked ${selectedAlg.value} |  ${selectedCipher.value} | ${encdecGrp.selectedToggle.userData}")
+                                    if (isEncrypted) {
+                                        if (isYAML) {
+                                            textFieldRes.set(String.format("\"![%s]\"", res))
+                                        } else {
+                                            textFieldRes.set(String.format("![%s]", res))
+                                        }
+                                    } else {
+                                        textFieldRes.set(res)
+                                    }
+                                    //println("Clicked ${selectedAlg.value} |  ${selectedCipher.value} | ${encdecGrp.selectedToggle.userData}")
                                 }
                             }
                         }
@@ -166,6 +182,7 @@ class MainView : View("SecureProps EncDec") {
             }
             text = "Secret (encrypted secret when decoding)"
         }
+
         textarea {
             vboxConstraints {
                 margin = Insets(2.0,20.0,20.0,20.0)
@@ -184,6 +201,16 @@ class MainView : View("SecureProps EncDec") {
                 fontWeight = FontWeight.BOLD
             }
             text = "Encoded secret (decrypted secret when decoding)"
+        }
+        checkbox {
+            vboxConstraints {
+                margin = Insets(2.0,20.0,2.0,20.0)
+                vGrow = Priority.ALWAYS
+            }
+            text = "Add YAML quotes"
+            action {
+                isYAML = isSelected
+            }
         }
         textarea {
             vboxConstraints {
