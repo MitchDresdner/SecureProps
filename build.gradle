@@ -70,8 +70,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/MitchDresdner/SecureProps")
             credentials {
-                username = "mitchd@mindspring.com"       // project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                password = "c7821fe1e741ef587741e6a07170f47d20a62d88"   //project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
             }
         }
     }
