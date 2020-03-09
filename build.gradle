@@ -43,7 +43,7 @@ dependencies {
 // MjD 8 Mar 2020 added for GH pkg pub to resolv groupid error
 group 'com.example.demo'
 archivesBaseName = 'Uber'
-version '0.0.1'
+version '0.0.2'
 
 mainClassName = "com.example.demo.app.MyApp"
 
