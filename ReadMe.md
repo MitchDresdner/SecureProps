@@ -6,7 +6,7 @@ In my blog post [Securing Mule 4 config properties](https://bestow.info/securing
 
 This package has been installed in the git repository as an Uber Jar. If you choose to download it instead of building it your self, be sure to run it in the same folder as the Mule 4 secure properties jar.
 
-  TBD link to blog post describing usage
+For more information see my blog post:  [A TornadoFx wrapper for Mule 4 secure properties](https://bestow.info/a-tornadofx-wrapper-for-mule-4-secure-properties/) to get a more detailed understanding of the inner workings.
 
 **TornadoFx GUI application**
 
